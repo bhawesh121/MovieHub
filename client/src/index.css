@@ -1,0 +1,689 @@
+/* 🎥 MOVIEVAULT - CINEBOOK DARK THEME */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+:root {
+  --primary: #e50914;
+  --dark-bg: #0e0e0e;
+  --card-bg: #1a1a1a;
+  --text-light: #ffffff;
+  --text-muted: #b3b3b3;
+}
+
+/* 🌍 Global Reset */
+body {
+    background-color: #141414;  /* light black tone */
+  background-color: var(--dark-bg);
+  color: var(--text-light);
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5 {
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+a:hover {
+  color: #ff3c41;
+}
+
+/* 🌆 Layout Container */
+.container {
+  padding-top: 100px;
+  padding-bottom: 60px;
+}
+
+/* 🧭 Navbar */
+.navbar {
+  background-color: rgba(15, 15, 15, 0.95) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  z-index: 1050;
+}
+.navbar-brand {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary) !important;
+}
+.navbar .nav-link {
+  color: #ddd !important;
+  margin: 0 8px;
+  transition: all 0.3s ease;
+}
+.navbar .nav-link:hover {
+  color: var(--primary) !important;
+}
+
+/* 🎬 Movie Cards */
+.movie-card {
+  background: transparent;
+  border: none;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+.movie-card:hover {
+  transform: scale(1.08);
+  z-index: 2;
+}
+.movie-card img {
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.4s ease-in-out;
+}
+.movie-card:hover img {
+  opacity: 0.85;
+  transform: scale(1.1);
+}
+.movie-card .card-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 14px;
+  background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+  border-radius: 0 0 12px 12px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.movie-card:hover .card-body {
+  opacity: 1;
+}
+
+/* 🔑 Auth (Login / Register) */
+.auth-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top, #1b1b1b, #000);
+}
+
+.auth-card {
+  background: rgba(25, 25, 25, 0.95);
+  padding: 45px 40px;
+  border-radius: 18px;
+  width: 380px;
+  color: var(--text-light);
+  box-shadow: 0 0 25px rgba(229, 9, 20, 0.25);
+  transition: all 0.4s ease-in-out;
+}
+.auth-card:hover {
+  box-shadow: 0 0 35px rgba(229, 9, 20, 0.4);
+}
+.auth-card h2 {
+  text-align: center;
+  color: var(--primary);
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+.auth-card input {
+  background: #1f1f1f;
+  border: 1px solid #333;
+  color: var(--text-light);
+  border-radius: 8px;
+  height: 45px;
+  transition: all 0.3s ease;
+}
+.auth-card input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 8px rgba(229, 9, 20, 0.4);
+  outline: none;
+}
+.auth-card button {
+  background: linear-gradient(90deg, var(--primary), #ff0a16);
+  border: none;
+  color: #fff;
+  border-radius: 25px;
+  padding: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+.auth-card button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px rgba(229, 9, 20, 0.7);
+}
+
+/* 🎟️ Booking Page */
+.booking-container {
+  max-width: 750px;
+  margin: 80px auto;
+  background: rgba(20, 20, 20, 0.95);
+  padding: 45px 30px;
+  border-radius: 18px;
+  box-shadow: 0 0 30px rgba(229, 9, 20, 0.25);
+  text-align: center;
+}
+.booking-container h2 {
+  color: var(--primary);
+}
+.screen-bar {
+  width: 60%;
+  height: 5px;
+  background: linear-gradient(90deg, #fff, #ccc, #fff);
+  border-radius: 5px;
+  margin: 20px auto 40px;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+}
+
+/* Seats */
+.seat-btn {
+  background: #222;
+  color: #fff;
+  border: none;
+  margin: 6px;
+  border-radius: 8px;
+  width: 48px;
+  height: 48px;
+  font-weight: 600;
+  transition: all 0.25s ease-in-out;
+}
+.seat-btn:hover {
+  background-color: var(--primary);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(229, 9, 20, 0.7);
+}
+.seat-btn.selected {
+  background-color: var(--primary);
+  box-shadow: 0 0 15px rgba(229, 9, 20, 0.9);
+}
+
+/* Pay Button */
+.btn-pay-glow {
+  background: linear-gradient(90deg, var(--primary), #ff1a1a);
+  border: none;
+  color: #fff;
+  border-radius: 30px;
+  padding: 14px 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
+}
+.btn-pay-glow:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(229, 9, 20, 0.8);
+}
+
+/* 🧾 My Bookings */
+.my-bookings {
+  background: var(--dark-bg);
+  min-height: 100vh;
+  color: var(--text-light);
+  padding: 100px 50px;
+}
+.booking-item {
+  background: rgba(25, 25, 25, 0.9);
+  padding: 15px 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(229, 9, 20, 0.15);
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+.booking-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(229, 9, 20, 0.3);
+}
+
+/* 💫 Fade-in Animation */
+.fade-in {
+  animation: fadeIn 0.8s ease-in-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 🎞️ Footer */
+footer {
+  background: var(--dark-bg);
+  color: var(--text-muted);
+  padding: 60px 0 30px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+footer h5 {
+  color: var(--primary);
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+footer p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+footer a {
+  color: var(--text-muted);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 6px;
+  transition: color 0.3s ease;
+}
+footer a:hover {
+  color: #fff;
+}
+footer .footer-logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+footer .footer-social a {
+  display: inline-block;
+  color: #fff;
+  margin-right: 10px;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+footer .footer-social a:hover {
+  color: var(--primary);
+  transform: scale(1.2);
+}
+
+/* 🖱️ Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #111;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #ff3c41;
+}
+/* 🧱 Universal Page Layout */
+.page-section {
+  background: #0e0e0e;
+  min-height: 100vh;
+  padding: 80px 0;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+
+.card-dark {
+  background: rgba(25, 25, 25, 0.95);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 0 20px rgba(229, 9, 20, 0.15);
+  transition: all 0.3s ease;
+}
+.card-dark:hover {
+  box-shadow: 0 0 30px rgba(229, 9, 20, 0.3);
+  transform: scale(1.02);
+}
+
+/* Red Input Focus (used in Contact, Register) */
+input, textarea {
+  background: #1c1c1c;
+  color: #fff;
+  border: 1px solid #333;
+}
+input:focus, textarea:focus {
+  border-color: #e50914;
+  box-shadow: 0 0 8px rgba(229, 9, 20, 0.5);
+}
+
+/* Buttons */
+.btn-red {
+  background: linear-gradient(90deg, #e50914, #ff1a1a);
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  padding: 10px 28px;
+  transition: all 0.3s ease;
+}
+.btn-red:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(229, 9, 20, 0.6);
+}
+/* 🎬 Contact Page - MovieVault Dark Theme */
+.contact-page {
+  background-color: #141414; /* Light black */
+  min-height: 100vh;
+  padding: 60px 0;
+}
+
+.contact-card {
+  background: rgba(25, 25, 25, 0.95);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(229, 9, 20, 0.3);
+  color: #fff;
+}
+
+.dark-input {
+  background-color: #1f1f1f;
+  border: 1px solid #333;
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px 14px;
+  transition: all 0.3s ease;
+}
+
+.dark-input::placeholder {
+  color: #aaa;
+}
+
+.dark-input:focus {
+  background-color: #1f1f1f;
+  border-color: #e50914;
+  box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+  outline: none;
+}
+
+/* 🔘 Send Button */
+.btn-send {
+  background: linear-gradient(90deg, #e50914, #ff0a16);
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 35px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(229, 9, 20, 0.5);
+}
+
+.btn-send:hover {
+  transform: scale(1.05);
+  background: linear-gradient(90deg, #ff3c41, #e50914);
+  box-shadow: 0 0 25px rgba(229, 9, 20, 0.8);
+}
+
+/* ✅ Success Message */
+.alert-success {
+  background: rgba(0, 128, 0, 0.15);
+  border: 1px solid #28a745;
+  color: #c8fbc8;
+  border-radius: 8px;
+}
+
+/* Fade Animation */
+.fade-in {
+  animation: fadeIn 0.8s ease-in-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* 🎬 My Bookings Page - MovieVault Theme */
+.mybookings-page {
+  background-color: #141414;
+  min-height: 100vh;
+  color: #fff;
+  padding-bottom: 60px;
+}
+
+.mybookings-container {
+  background: rgba(25, 25, 25, 0.95);
+  padding: 40px;
+  border-radius: 18px;
+  box-shadow: 0 0 25px rgba(229, 9, 20, 0.25);
+}
+
+.booking-card {
+  background: rgba(20, 20, 20, 0.95);
+  border: 1px solid #222;
+  border-radius: 14px;
+  transition: all 0.3s ease;
+  color: #ddd;
+}
+
+.booking-card:hover {
+  transform: scale(1.02);
+  border-color: #e50914;
+  box-shadow: 0 0 25px rgba(229, 9, 20, 0.4);
+}
+
+.text-secondary {
+  color: #bbb !important;
+}
+
+.text-danger {
+  color: #e50914 !important;
+}
+
+.text-success {
+  color: #46ff85 !important;
+}
+
+.text-muted {
+  color: #888 !important;
+}
+
+/* Fade-in Animation */
+.fade-in {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+body {
+  background-color: #141414;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+/* 🔺 Auth Navbar (for Login & Register only) */
+.auth-navbar {
+  background: rgba(20, 20, 20, 0.95);
+  height: 70px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.auth-navbar-brand {
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+.auth-navbar-brand:hover {
+  color: #e50914;
+}
+/* 🎬 Auth Page Shared Styles (Login & Register) */
+.auth-page {
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #1a1a1a, #000);
+  color: #fff;
+  padding-top: 40px;
+}
+
+/* 🔲 Card Container */
+.auth-card {
+  background: rgba(0, 0, 0, 0.85);
+  padding: 45px;
+  border-radius: 18px;
+  box-shadow: 0 0 25px rgba(229, 9, 20, 0.25);
+  width: 380px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 35px rgba(229, 9, 20, 0.35);
+}
+
+/* 🧾 Input Styling */
+.auth-input {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-input:focus {
+  border-color: #e50914;
+  box-shadow: 0 0 10px rgba(229, 9, 20, 0.6);
+  outline: none;
+}
+
+/* 🔘 Auth Buttons */
+.btn-auth {
+  width: 100%;
+  background: linear-gradient(90deg, #e50914, #ff0a16);
+  border: none;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 12px 0;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(229, 9, 20, 0.3);
+}
+
+.btn-auth:hover {
+  transform: scale(1.05);
+  background: linear-gradient(90deg, #ff3c41, #e50914);
+  box-shadow: 0 0 25px rgba(229, 9, 20, 0.5);
+}
+
+.btn-auth:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* 💫 Fade-in Animation */
+.fade-in {
+  animation: fadeIn 0.7s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ✨ Link Hover Glow */
+.hover-glow:hover {
+  color: #ff3c41 !important;
+  text-shadow: 0 0 12px rgba(229, 9, 20, 0.8);
+}
+
+/* 🎬 Auth Page Shared Styles (Login & Register) */
+.auth-page {
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #1a1a1a, #000);
+  color: #fff;
+  padding-top: 40px;
+}
+
+/* 🔲 Card Container */
+.auth-card {
+  background: rgba(0, 0, 0, 0.85);
+  padding: 45px;
+  border-radius: 18px;
+  box-shadow: 0 0 25px rgba(229, 9, 20, 0.25);
+  width: 380px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 35px rgba(229, 9, 20, 0.35);
+}
+
+/* 🧾 Input Styling */
+.auth-input {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-input:focus {
+  border-color: #e50914;
+  box-shadow: 0 0 10px rgba(229, 9, 20, 0.6);
+  outline: none;
+}
+
+/* 🔘 Auth Buttons */
+.btn-auth {
+  width: 100%;
+  background: linear-gradient(90deg, #e50914, #ff0a16);
+  border: none;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 12px 0;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(229, 9, 20, 0.3);
+}
+
+.btn-auth:hover {
+  transform: scale(1.05);
+  background: linear-gradient(90deg, #ff3c41, #e50914);
+  box-shadow: 0 0 25px rgba(229, 9, 20, 0.5);
+}
+
+.btn-auth:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* 💫 Fade-in Animation */
+.fade-in {
+  animation: fadeIn 0.7s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ✨ Link Hover Glow */
+.hover-glow:hover {
+  color: #ff3c41 !important;
+  text-shadow: 0 0 12px rgba(229, 9, 20, 0.8);
+}
+
