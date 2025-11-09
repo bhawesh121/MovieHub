@@ -26,8 +26,6 @@ app.use((req, res, next) => {
 });
 
 
-const cors = require('cors');
-
 // Allow both local dev and deployed frontend
 app.use(cors({
   origin: [
