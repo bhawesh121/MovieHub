@@ -20,6 +20,11 @@ app.use(express.urlencoded({ extended: true }));
 
 // ✅ CORS setup (Netlify + localhost allowed)
 // ✅ CORS setup (allow local + deployed frontend)
+app.use((req, res, next) => {
+  console.log('Request Origin:', req.headers.origin);
+  next();
+});
+
 const allowedOrigins = [
   'http://localhost:5173',
   'https://moviehub69.netlify.app' // ✅ replace with your actual Netlify frontend URL
