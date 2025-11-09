@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://moviehub-frontend.netlify.app'  // 👈 your actual Netlify URL
+    'https://moviehub69.netlify.app'  // 👈 your actual Netlify URL
   ],
   credentials: true
 }));
