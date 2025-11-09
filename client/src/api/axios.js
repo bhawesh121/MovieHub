@@ -3,7 +3,7 @@ import axios from "axios";
 // Automatically use your backend URL or fallback to local development
 const BASE_URL =
   import.meta.env.VITE_API_BASE_URL ||
-  "https://your-backend-name.onrender.com/api"; // 🔹 Replace with your actual Render backend URL
+  "https://moviehub-1-9sta.onrender.com/api"; // 🔹 Replace with your actual Render backend URL
 
 const instance = axios.create({
   baseURL: BASE_URL,

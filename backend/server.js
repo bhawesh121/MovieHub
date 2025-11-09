@@ -1,11 +1,11 @@
-// Load environment variables
+// ✅ Load environment variables
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 
-// Import route files
+// ✅ Import route files
 const authRoutes = require('./routes/auth');
 const movieRoutes = require('./routes/movies');
 const bookingRoutes = require('./routes/booking');
@@ -14,28 +14,37 @@ const contactRoutes = require('./routes/contact');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ✅ Middleware
+// ✅ Middleware for JSON parsing
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ CORS setup (allow both local + deployed frontend)
-app.use(cors({
-  origin: process.env.CLIENT_BASE || 'http://localhost:5173',
-  credentials: true
-}));
+// ✅ CORS setup (Netlify + localhost allowed)
+app.use(
+  cors({
+    origin: [
+      'http://localhost:5173', // local dev
+      'https://your-frontend.netlify.app' // your Netlify URL
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true,
+  })
+);
+
+// ✅ Handle preflight requests (CORS)
+app.options('*', cors());
 
 // ✅ MongoDB connection
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   })
   .then(() => console.log('✅ MongoDB connected'))
   .catch((err) => {
     console.error('❌ MongoDB connection error:', err.message || err);
   });
 
-// ✅ API routes (with clean prefix)
+// ✅ API routes (all prefixed with /api)
 app.use('/api/auth', authRoutes);
 app.use('/api/movies', movieRoutes);
 app.use('/api/booking', bookingRoutes);
@@ -46,12 +55,13 @@ app.get('/', (req, res) => {
   res.json({ message: '🎬 Movie Booking Backend is running successfully!' });
 });
 
-// ✅ Serve static frontend build (optional for deployment)
+// ✅ Serve static frontend build in production
 const __dirname1 = path.resolve();
+
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname1, '/client/dist')));
+  app.use(express.static(path.join(__dirname1, '/client/build')));
   app.get('*', (req, res) =>
-    res.sendFile(path.resolve(__dirname1, 'client', 'dist', 'index.html'))
+    res.sendFile(path.resolve(__dirname1, 'client', 'build', 'index.html'))
   );
 }
 
