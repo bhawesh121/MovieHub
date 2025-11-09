@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import API from "../api/axios"; // ✅ changed import name for clarity
+import API from "../api/axios"; // ✅ axios instance already has /api baseURL
 import "../index.css";
 
 export default function Register({ onRegister }) {
@@ -15,14 +15,14 @@ export default function Register({ onRegister }) {
     setError("");
 
     try {
-      // ✅ Use API instance (points to your Render backend)
+      // ✅ API instance already points to `${REACT_APP_API_URL}/api`
       const res = await API.post("/auth/register", { name, email, password });
 
       // ✅ Store token and user locally
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      // ✅ Call parent handler if provided
+      // ✅ Trigger parent state update
       if (onRegister) onRegister(res.data.user);
 
       alert(res.data.message || "Registered successfully!");
