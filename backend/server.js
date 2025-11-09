@@ -25,27 +25,17 @@ app.use((req, res, next) => {
   next();
 });
 
-const allowedOrigins = [
-  'http://localhost:5173',
-  'https://moviehub69.netlify.app' // ✅ replace with your actual Netlify frontend URL
-];
 
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  
-  if (req.method === 'OPTIONS') {
-    return res.sendStatus(204);
-  }
+const cors = require('cors');
 
-  next();
-});
-
+// Allow both local dev and deployed frontend
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'https://moviehub-frontend.netlify.app'  // 👈 your actual Netlify URL
+  ],
+  credentials: true
+}));
 
 
 
