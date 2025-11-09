@@ -1,9 +1,11 @@
+// Load environment variables
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 
+// Import route files
 const authRoutes = require('./routes/auth');
 const movieRoutes = require('./routes/movies');
 const bookingRoutes = require('./routes/booking');
@@ -12,24 +14,46 @@ const contactRoutes = require('./routes/contact');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// ✅ Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// ✅ CORS setup (allow both local + deployed frontend)
 app.use(cors({
   origin: process.env.CLIENT_BASE || 'http://localhost:5173',
   credentials: true
 }));
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(()=> console.log('✅ MongoDB connected'))
-  .catch(err=> {
+// ✅ MongoDB connection
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log('✅ MongoDB connected'))
+  .catch((err) => {
     console.error('❌ MongoDB connection error:', err.message || err);
   });
 
-app.use('/auth', authRoutes);
-app.use('/movies', movieRoutes);
-app.use('/booking', bookingRoutes);
-app.use('/contact', contactRoutes);
+// ✅ API routes (with clean prefix)
+app.use('/api/auth', authRoutes);
+app.use('/api/movies', movieRoutes);
+app.use('/api/booking', bookingRoutes);
+app.use('/api/contact', contactRoutes);
 
-app.get('/', (req, res) => res.json({ message: 'Movie Booking Backend' }));
+// ✅ Root route
+app.get('/', (req, res) => {
+  res.json({ message: '🎬 Movie Booking Backend is running successfully!' });
+});
 
-app.listen(PORT, ()=> console.log(`🚀 Backend running on ${PORT}`));
+// ✅ Serve static frontend build (optional for deployment)
+const __dirname1 = path.resolve();
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname1, '/client/dist')));
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname1, 'client', 'dist', 'index.html'))
+  );
+}
+
+// ✅ Start server
+app.listen(PORT, () => console.log(`🚀 Backend running on port ${PORT}`));

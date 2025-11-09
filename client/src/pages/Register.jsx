@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "../api/axios";
+import API from "../api/axios"; // ✅ changed import name for clarity
 import "../index.css";
 
 export default function Register({ onRegister }) {
@@ -15,11 +15,19 @@ export default function Register({ onRegister }) {
     setError("");
 
     try {
-      const res = await axios.post("/auth/register", { name, email, password });
+      // ✅ Use API instance (points to your Render backend)
+      const res = await API.post("/auth/register", { name, email, password });
+
+      // ✅ Store token and user locally
       localStorage.setItem("token", res.data.token);
-      onRegister(res.data.user);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
+      // ✅ Call parent handler if provided
+      if (onRegister) onRegister(res.data.user);
+
+      alert(res.data.message || "Registered successfully!");
     } catch (err) {
-      console.error(err);
+      console.error("❌ Register Error:", err);
       setError(err.response?.data?.message || "Registration failed.");
     } finally {
       setLoading(false);
@@ -70,11 +78,7 @@ export default function Register({ onRegister }) {
             />
           </div>
 
-          <button
-            type="submit"
-            className="btn-auth mt-3"
-            disabled={loading}
-          >
+          <button type="submit" className="btn-auth mt-3" disabled={loading}>
             {loading ? (
               <span className="spinner-border spinner-border-sm me-2"></span>
             ) : (

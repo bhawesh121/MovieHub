@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "../api/axios";
+import API from "../api/axios"; // ✅ renamed import for clarity
 import "../index.css";
 
 export default function Login({ onLogin }) {
@@ -14,11 +14,17 @@ export default function Login({ onLogin }) {
     setError("");
 
     try {
-      const res = await axios.post("/auth/login", { email, password });
+      // ✅ Use configured API instance (it now points to Render backend)
+      const res = await API.post("/auth/login", { email, password });
+
+      // ✅ Store JWT token and user info locally
       localStorage.setItem("token", res.data.token);
-      onLogin(res.data.user);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
+      // ✅ Update parent state if provided
+      if (onLogin) onLogin(res.data.user);
     } catch (err) {
-      console.error(err);
+      console.error("❌ Login Error:", err);
       setError(err.response?.data?.message || "Invalid credentials.");
     } finally {
       setLoading(false);
@@ -57,11 +63,7 @@ export default function Login({ onLogin }) {
             />
           </div>
 
-          <button
-            type="submit"
-            className="btn-auth mt-3"
-            disabled={loading}
-          >
+          <button type="submit" className="btn-auth mt-3" disabled={loading}>
             {loading ? (
               <span className="spinner-border spinner-border-sm me-2"></span>
             ) : (
